@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Assignment - 7 (LWS)
 
-## Getting Started
+## Live Link: https://lws-xstream-assignment-7-lws.vercel.app/
 
-First, run the development server:
+# Requirements:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+✓ আপনাদের 'dist/data' ফোল্ডার এর সাথে videos.js নামে একটি ফাইল রয়েছে। সেখানে কিছু ভিডিওর লিস্ট রয়েছে । সেই ভিডিও লিস্ট গুলো দিয়ে আপনাকে API বানাতে হবে । আমরা যেন '/api/videos' এই endpoint এ GET Request করলে সব গুলো ভিডিও দেখতে পারি । **এই API UI এর সাথে কানেক্ট করার প্রয়োজন নেই ।**
+
+✓ আপনাদের আরো একটি API Endpoint বানাতে হবে । আপনার endpoint হবে এমন - '/api/videos/{id}' । এই Endpoint এ id দিয়ে GET রিকুয়েস্ট করলে সেই id এর ভিডিও Object নিয়ে এসে দেখাবে । **এই API UI এর সাথে কানেক্ট করার প্রয়োজন নেই ।**
+
+✓ আপনার '/api/videos/{id}' Endpoint এ PATCH রিকুয়েস্ট করলে ভিডিও এর 'title' এবং 'description' প্রোপার্টি এর ভ্যালু পরিবর্তন করা যাবে, সেক্ষেত্রে রিকুয়েস্ট এর Response এ যেন Updated Data পাওয়া যায় । অর্থাৎ যদি 'title' প্রোপার্টি পরিবর্তন করা হয়, সেক্ষেত্রে Updated Title সহ পুরো Video Object কে যেন রেসপন্স হিসেবে পাওয়া যায় । Error হ্যান্ডেলিং এর ক্ষেত্রেও, খেয়াল রাখতে হবে । অর্থাৎ কেউ যদি 'title' বা 'description' এর পরিবর্তে অন্য কোনো ফিল্ড/প্রোপার্টি পরিবর্তন করতে চায়। সেক্ষেত্রে Error দিতে হবে । **এই API UI এর সাথে কানেক্ট করার প্রয়োজন নেই ।**
+
+✓ একই Endpoint এ DELETE রিকুয়েস্ট করলে ভিডিও Delete হয়ে যাবে । **এই API UI এর সাথে কানেক্ট করার প্রয়োজন নেই ।**
+
+✓ আপনাদের দেয়া 'videos.js' ফাইল এর ডেটা গুলো, Dynamically import করে নিয়ে এসে UI তে ভিডিও কার্ড আকারে দেখাতে হবে । যেহেতু আমরা Next.js এ fetch করা বোঝাই নি, সেহেতু আপনি fetch/axios ব্যবহার করতে পারবেন না। আপনাকে Dynamically import করে নিয়ে এসেই দেখাতে হবে । এখানে **Dynamic import** করাটা গুরুত্বপূর্ণ। কিভাবে কোনো json file কে ডাইনামিকভাবে ইম্পোর্ট করা যায় সেটি মডিউল এর একটি ভিডিওতে দেখানো হয়েছে।
+
+✓ প্রতিটা ভিডিও কার্ডে ক্লিক করলে, Video Details Modal ওপেন হবে এবং URL Route দেখতে হবে এমন - '/videos/:videoId' । অর্থাৎ যেই ভিডিও Modal ওপেন হবে, তার আইডি URL এ দেখা যাবে । সেই সাথে **Parallel Routing** এবং **Intercepting Routing** ইমপ্লিমেন্ট করতে হবে, যেন **নেভিগেশন** করে কার্ড এ ক্লিক করলে মোডাল ওপেন হয় আর পেজ রিলোড করলে সেটি যেন একটি আলাদা পেজ আকারে দেখা যায় ।
+
+✓ Application এ যদি এমন কোনো রাউটে যাওয়া হয় যেই রাউট exist করে না, তাহলে Not Found পেজ দেখাতে হবে । আর যদি ভিডিও ডিটেইলস রাউটের এমন id দিয়ে পেজ রিকুয়েস্ট করা হয়, যেই আইডি দিয়ে কোনো ভিডিও নেই, সে ক্ষেত্রে আপনাকে এই মেসেজ দেখাতে হবে - "This video with {videoId} id was not found!" তার মানে আপনাকে কমন একটি Not found page বানাতে হবে এবং single video এর জন্য আলাদা not found page বানাতে হবে।
+
+✓ পুরো এসাইনমেন্ট টি তে আপনাদের Multi-language ইমপ্লিমেন্ট করতে হবে । দুটি language support করাতে হবে। বাংলা এবং ইংরেজি দুটি Language json ফাইল আপনাদের নিজেদের বানিয়ে নিতে হবে । Navbar এ language পরিবর্তন করার জন্যে একটি অপশন বানাতে হবে আপনাদের এবং ব্রাউজারের ডিফল্ট language preference অনুযায়ী প্রথম অবস্থায় auto language select করতে হবে যেভাবে মডিউলে দেখানো হয়েছে।
+
+# Overall Requirements:
+
+- Next.js v14 দিয়ে করতে হবে এসাইনমেন্ট। কমান্ড: **npx create-next-app@14**
+
+# To Run Locally
+
+1. **Clone the repository:**
+
+   ```
+   git clone https://github.com/Learn-with-Sumit/batch-2-assignment-7-lws-xstream-nasib15
+   cd batch-2-assignment-7-lws-xstream-nasib15
+   ```
+
+2. **Install the dependencies:**
+
+   ```
+   npm install
+   ```
+
+3. **Start the development server:**
+
+   ```
+   npm run dev
+   ```
+
+# Build for Production:
+
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+npm run build
+```
