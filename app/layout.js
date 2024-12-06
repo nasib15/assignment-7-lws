@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import { Exo_2, Play } from "next/font/google";
 import "./globals.css";
 
@@ -26,7 +27,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${play.variable} ${exo2.variable} antialiased bg-color-bg text-white font-exo`}
       >
-        {children}
+        <div className="container mx-auto px-4 py-4">
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );
