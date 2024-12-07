@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import { Exo_2, Play } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 
 const play = Play({
   subsets: ["latin"],
@@ -21,14 +21,14 @@ export const metadata = {
   description: "This is an video streaming platform where you can watch videos",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, params: { lang } }) {
   return (
     <html lang="en">
       <body
         className={`${play.variable} ${exo2.variable} antialiased bg-color-bg text-white font-exo`}
       >
         <div className="container mx-auto px-4 py-4">
-          <Navbar />
+          <Navbar lang={lang} />
           {children}
         </div>
       </body>

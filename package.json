@@ -10,9 +10,11 @@
     "push": "git push -u origin main && git push -u assignment main"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.5.8",
+    "negotiator": "^1.0.0",
+    "next": "14.2.20",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.20"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "postcss": "^8",

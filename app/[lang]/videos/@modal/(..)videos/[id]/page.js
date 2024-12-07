@@ -1,3 +1,4 @@
+import { getDictionary } from "@/app/[lang]/dictionaries/dictionaries";
 import Modal from "@/components/Modal";
 import avatar from "@/public/assets/avatar.png";
 import { PlayIcon } from "@/svg/Icon";
@@ -6,9 +7,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const InterceptedVideoDetailsPage = async ({ params: { id } }) => {
+const InterceptedVideoDetailsPage = async ({ params: { id, lang } }) => {
   const videosData = await import("@/data/videos.json");
   const video = videosData.default.find((video) => video.videoId === id);
+
+  const dict = await getDictionary(lang);
 
   if (!video) {
     notFound();
@@ -41,11 +44,11 @@ const InterceptedVideoDetailsPage = async ({ params: { id } }) => {
                   <PlayIcon />
                 </button>
                 <div className="bg-color-purple text-white px-2 py-1 rounded text-sm">
-                  LIVE
+                  {dict.video.live}
                 </div>
                 <span className="text-sm">46:02</span>
                 <button className="bg-color-purple hover:bg-opacity-80 text-white px-4 py-1 rounded-full text-sm">
-                  Donate
+                  {dict.video.donate}
                 </button>
               </div>
             </div>
@@ -61,14 +64,16 @@ const InterceptedVideoDetailsPage = async ({ params: { id } }) => {
               <p className="font-semibold">{channelTitle}</p>
             </div>
             <button className="bg-color-purple hover:bg-opacity-80 text-white px-4 py-1 rounded-full text-sm ml-auto">
-              Subscribe
+              {dict.video.subscribe}
             </button>
           </div>
         </div>
 
         {/* You may like section */}
         <div className="lg:w-1/4">
-          <h2 className="text-xl font-semibold mb-4">You may like</h2>
+          <h2 className="text-xl font-semibold mb-4">
+            {dict.video.youMayLike}
+          </h2>
           <div className="space-y-4">
             {otherVideosWithoutThis.slice(0, 3).map((video) => (
               <Link
@@ -80,7 +85,7 @@ const InterceptedVideoDetailsPage = async ({ params: { id } }) => {
                   src={video.thumbnail}
                   width={107}
                   height={80}
-                  alt="Fallout Shelter PC Thumbnail"
+                  alt={video.title}
                   className="w-30 h-20 rounded object-cover"
                 />
                 <div>
