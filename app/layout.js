@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import { Exo_2, Play } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
 
 const play = Play({
   subsets: ["latin"],

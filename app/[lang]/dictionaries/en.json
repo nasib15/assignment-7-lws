@@ -16,16 +16,6 @@
     "title": "Streams of the day",
     "viewAll": "View all"
   },
-  "errors": {
-    "notFound": {
-      "title": "404 - Page Not Found",
-      "message": "Sorry, the page you are looking for does not exist.",
-      "goBack": "Go Back Home"
-    },
-    "videoNotFound": {
-      "message": "This video with {id} id was not found!"
-    }
-  },
   "video": {
     "live": "LIVE",
     "donate": "Donate",

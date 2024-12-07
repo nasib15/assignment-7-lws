@@ -6,5 +6,8 @@ const dictionaries = {
 };
 
 export const getDictionary = async (locale) => {
+  if (!locale || !dictionaries[locale]) {
+    return dictionaries["en"]();
+  }
   return dictionaries[locale]();
 };
