@@ -3,10 +3,16 @@ import { PlayIcon } from "@/svg/Icon";
 import { getRelativeTime } from "@/utils/getRelativeTime";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 const VideoDetailsPage = async ({ params: { id } }) => {
   const videosData = await import("@/data/videos.json");
   const video = videosData.default.find((video) => video.videoId === id);
+
+  if (!video) {
+    notFound();
+  }
+
   const { title, videoId, channelTitle } = video;
 
   const otherVideosWithoutThis = videosData.default.filter(
@@ -24,7 +30,7 @@ const VideoDetailsPage = async ({ params: { id } }) => {
             className="w-full aspect-video h-[500px]"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
 
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">

@@ -3,7 +3,16 @@ import { getAllVideos } from "@/data/videos";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
-  return NextResponse.json(getVideoById(params.id));
+  const video = getVideoById(params.id);
+
+  if (!video) {
+    return NextResponse.json(
+      { message: `This video with ${params.id} id was not found!` },
+      { status: 404 }
+    );
+  }
+
+  return NextResponse.json(video);
 }
 
 export async function PATCH(request, { params }) {

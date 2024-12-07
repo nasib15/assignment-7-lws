@@ -23,7 +23,7 @@ const Banner = () => {
             className="w-full aspect-video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
 
           <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-between p-4">

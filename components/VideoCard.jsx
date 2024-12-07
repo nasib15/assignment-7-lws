@@ -1,13 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 
 const VideoCard = ({ video }) => {
-  const { title, thumbnail, videoId, channelTitle } = video;
+  const { title, thumbnail, channelTitle } = video;
   return (
-    <Link
-      href={`/videos/${videoId}`}
-      className="rounded-lg overflow-hidden bg-color-gray"
-    >
+    <div className="rounded-lg overflow-hidden bg-color-gray">
       <Image
         src={thumbnail}
         alt={title}
@@ -19,7 +15,7 @@ const VideoCard = ({ video }) => {
         <p className="font-semibold">{title}</p>
         <p className="text-sm text-gray-400">{channelTitle}</p>
       </div>
-    </Link>
+    </div>
   );
 };
 export default VideoCard;
