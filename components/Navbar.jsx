@@ -1,5 +1,4 @@
 import avatar from "@/public/assets/avatar.png";
-import logo from "@/public/assets/logo.svg";
 import { SearchIcon } from "@/svg/Icon";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,17 +7,25 @@ const Navbar = () => {
   return (
     <header className="flex justify-between items-center mb-8">
       <div className="flex items-center space-x-8">
-        <Image src={logo} alt="LWS Xstream Logo" className="h-6" />
+        <Link href={"/"}>
+          <Image
+            src="/assets/logo.svg"
+            width={224}
+            height={24}
+            alt="LWS Xstream Logo"
+            className="h-6"
+          />
+        </Link>
         <nav className="hidden md:flex space-x-6">
-          <Link href="#" className="text-color-purple font-semibold">
+          <a href="#" className="text-color-purple font-semibold">
             TOP STREAMING
-          </Link>
-          <Link href="#" className="text-gray-400 hover:text-white">
+          </a>
+          <a href="#" className="text-gray-400 hover:text-white">
             GAMES
-          </Link>
-          <Link href="#" className="text-gray-400 hover:text-white">
+          </a>
+          <a href="#" className="text-gray-400 hover:text-white">
             TEAMS
-          </Link>
+          </a>
         </nav>
       </div>
       <div className="flex items-center space-x-4">
@@ -31,11 +38,7 @@ const Navbar = () => {
           <SearchIcon />
         </div>
 
-        <Image
-          src={avatar}
-          alt="User Avatar"
-          className="w-8 h-8 rounded-full"
-        />
+        <Image src={avatar} alt="User Avatar" class="w-8 h-8 rounded-full" />
       </div>
     </header>
   );
