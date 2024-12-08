@@ -1,13 +1,16 @@
 "use client";
 
 import { getRelativeTime } from "@/utils/getRelativeTime";
-import { handleRedirect } from "@/utils/handleRedirect";
 import Image from "next/image";
 
 const SmallVideo = ({ video, lang }) => {
+  const handleClick = () => {
+    window.location.href = `/${lang}/videos/${video.videoId}`;
+  };
+
   return (
     <div
-      onClick={() => handleRedirect(lang, `/${lang}/videos/${video.videoId}`)}
+      onClick={handleClick}
       key={video.videoId}
       className="flex items-start space-x-4 cursor-pointer"
     >
@@ -28,4 +31,5 @@ const SmallVideo = ({ video, lang }) => {
     </div>
   );
 };
+
 export default SmallVideo;
