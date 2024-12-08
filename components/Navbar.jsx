@@ -17,7 +17,7 @@ const Navbar = async ({ lang }) => {
             width={224}
             height={24}
             alt="LWS Xstream Logo"
-            className="h-6"
+            className="w-36 md:w-[224px] h-6"
           />
         </Link>
         <nav className="hidden md:flex space-x-6">
@@ -38,7 +38,7 @@ const Navbar = async ({ lang }) => {
           <input
             type="text"
             placeholder={dict.nav.search}
-            className="bg-color-gray rounded-full py-2 px-4 w-64 focus:outline-none focus:ring-2 focus:ring-color-purple"
+            className="bg-color-gray rounded-full py-2 px-4 w-32 md:w-48 lg:w-64 focus:outline-none focus:ring-2 focus:ring-color-purple"
           />
           <svg
             className="w-5 h-5 text-gray-400 absolute right-3 top-2.5"
@@ -56,11 +56,7 @@ const Navbar = async ({ lang }) => {
           </svg>
         </div>
 
-        <Image
-          src={avatar}
-          alt="User Avatar"
-          className="w-8 h-8 rounded-full"
-        />
+        <Image src={avatar} alt="User Avatar" className="size-8 rounded-full" />
       </div>
     </header>
   );
