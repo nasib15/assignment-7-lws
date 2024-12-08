@@ -34,6 +34,16 @@ export default function Modal({ children }) {
   );
 
   useEffect(() => {
+    // Disable scrolling on body when modal is open
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      // Re-enable scrolling when modal is closed
+      document.body.style.overflow = "unset";
+    };
+  }, []);
+
+  useEffect(() => {
     if (typeof window !== "undefined") {
       document.addEventListener("keydown", onKeyDown);
       return () => document.removeEventListener("keydown", onKeyDown);
@@ -43,12 +53,12 @@ export default function Modal({ children }) {
   return (
     <div
       ref={overlay}
-      className="fixed z-10 left-0 right-0 top-0 bottom-0 mx-auto bg-black/40 lg:p-10 backdrop-blur-sm"
+      className="fixed z-10 left-0 right-0 top-0 bottom-0 mx-auto bg-black/40 backdrop-blur-sm overflow-y-auto"
       onClick={onClick}
     >
       <div
         ref={wrapper}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10/12 md:w-9/12 lg:w-11/12 p-6"
+        className="absolute top-0 left-0 right-0 min-h-full w-full p-6 lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:min-h-0 lg:w-11/12"
       >
         {children}
       </div>
