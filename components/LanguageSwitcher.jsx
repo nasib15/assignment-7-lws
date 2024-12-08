@@ -1,12 +1,12 @@
 "use client";
 
+import { handleRedirect } from "@/utils/handleRedirect";
 import Image from "next/image";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const LanguageSwitcher = () => {
-  const router = useRouter();
   const pathname = usePathname();
 
   const languages = [
@@ -19,6 +19,7 @@ const LanguageSwitcher = () => {
       language: "Bangla",
     },
   ];
+
   const found = languages.find((lang) => pathname.includes(lang.code));
   const [selectedLanguage, setSelectedLanguage] = useState(
     found ?? languages[0]
@@ -32,7 +33,8 @@ const LanguageSwitcher = () => {
       language: lang === "en" ? "English" : "Bangla",
     });
     setShowMenu(false);
-    router.push(`/${lang}`);
+
+    handleRedirect(lang, pathname);
   };
 
   return (
@@ -52,12 +54,12 @@ const LanguageSwitcher = () => {
           {selectedLanguage.language}
         </button>
         {showMenu && (
-          <div className="absolute bg-black right-0 top-full mt-2 w-40 rounded-md p-2 z-10 shadow-lg">
+          <div className="absolute right-0 top-full mt-2 w-40 rounded-md bg-black p-2 z-10 shadow-lg">
             {languages.map((entry) => (
               <li
                 key={entry.code}
                 onClick={() => handleLanguageChange(entry.code)}
-                className="flex items-center gap-2 p-2 rounded-md cursor-pointer hover:bg-gray-600"
+                className="flex items-center gap-2 p-2 rounded-md cursor-pointer hover:bg-gray-700"
               >
                 <Image
                   className="max-w-8"

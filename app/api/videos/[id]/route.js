@@ -1,6 +1,5 @@
-import { getVideoById } from "@/app/api/data/videos";
-import { getAllVideos } from "@/data/videos";
 import { NextResponse } from "next/server";
+import { getAllVideos, getVideoById } from "../../data/videos";
 
 export async function GET(request, { params }) {
   const video = getVideoById(params.id);
