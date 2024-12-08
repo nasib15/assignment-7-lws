@@ -1,28 +1,30 @@
 import Banner from "@/components/Banner";
 import VideoCard from "@/components/VideoCard";
+import getVideos from "@/utils/getVideos";
 import Link from "next/link";
 import { getDictionary } from "./dictionaries/dictionaries";
 
 export default async function Home({ params: { lang } }) {
-  const videosData = await import("@/data/videos.json");
+  const videosData = await getVideos();
   const dict = await getDictionary(lang);
+
   return (
     <>
       <Banner lang={lang} />
       <section className="mt-12">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-semibold">{dict.streams.title}</h2>
-          <a
+          <Link
             href="#"
             className="bg-color-gray hover:bg-opacity-80 text-sm px-4 py-2 rounded-full"
           >
             {dict.streams.viewAll}
-          </a>
+          </Link>
         </div>
 
         {/* Grid style video cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {videosData.default.map((video) => (
+          {videosData?.map((video) => (
             <Link href={`${lang}/videos/${video.videoId}`} key={video.videoId}>
               <VideoCard video={video} />
             </Link>

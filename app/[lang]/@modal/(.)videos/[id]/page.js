@@ -1,15 +1,15 @@
 import { getDictionary } from "@/app/[lang]/dictionaries/dictionaries";
 import Modal from "@/components/Modal";
+import SmallVideo from "@/components/SmallVideo";
 import avatar from "@/public/assets/avatar.png";
 import { PlayIcon } from "@/svg/Icon";
-import { getRelativeTime } from "@/utils/getRelativeTime";
+import getVideos from "@/utils/getVideos";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 const InterceptedVideoDetailsPage = async ({ params: { id, lang } }) => {
-  const videosData = await import("@/data/videos.json");
-  const video = videosData.default.find((video) => video.videoId === id);
+  const videosData = await getVideos();
+  const video = videosData?.find((video) => video.videoId === id);
 
   const dict = await getDictionary(lang);
 
@@ -19,7 +19,7 @@ const InterceptedVideoDetailsPage = async ({ params: { id, lang } }) => {
 
   const { title, videoId, channelTitle } = video;
 
-  const otherVideosWithoutThis = videosData.default.filter(
+  const otherVideosWithoutThis = videosData.filter(
     (video) => video.videoId !== id
   );
 
@@ -75,27 +75,8 @@ const InterceptedVideoDetailsPage = async ({ params: { id, lang } }) => {
             {dict.video.youMayLike}
           </h2>
           <div className="space-y-4">
-            {otherVideosWithoutThis.slice(0, 3).map((video) => (
-              <Link
-                href={`/videos/${video.videoId}`}
-                key={video.videoId}
-                className="flex items-start space-x-4"
-              >
-                <Image
-                  src={video.thumbnail}
-                  width={107}
-                  height={80}
-                  alt={video.title}
-                  className="w-30 h-20 rounded object-cover"
-                />
-                <div>
-                  <h3 className="font-semibold">{video.title}</h3>
-                  <p className="text-sm text-gray-400">{video.channelTitle}</p>
-                  <p className="text-sm text-gray-400">
-                    {getRelativeTime(new Date(video.publishTime))}
-                  </p>
-                </div>
-              </Link>
+            {otherVideosWithoutThis?.slice(0, 3).map((video) => (
+              <SmallVideo key={video.videoId} lang={lang} video={video} />
             ))}
           </div>
         </div>

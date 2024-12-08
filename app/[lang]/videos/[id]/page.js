@@ -1,14 +1,15 @@
 import avatar from "@/public/assets/avatar.png";
 import { PlayIcon } from "@/svg/Icon";
 import { getRelativeTime } from "@/utils/getRelativeTime";
+import getVideos from "@/utils/getVideos";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDictionary } from "../../dictionaries/dictionaries";
 
 const VideoDetailsPage = async ({ params: { id, lang } }) => {
-  const videosData = await import("@/data/videos.json");
-  const video = videosData.default.find((video) => video.videoId === id);
+  const videosData = await getVideos();
+  const video = videosData?.find((video) => video.videoId === id);
 
   const dict = await getDictionary(lang);
 
@@ -18,7 +19,7 @@ const VideoDetailsPage = async ({ params: { id, lang } }) => {
 
   const { title, videoId, channelTitle } = video;
 
-  const otherVideosWithoutThis = videosData.default.filter(
+  const otherVideosWithoutThis = videosData.filter(
     (video) => video.videoId !== id
   );
 
@@ -67,7 +68,7 @@ const VideoDetailsPage = async ({ params: { id, lang } }) => {
       <div className="lg:w-1/4">
         <h2 className="text-xl font-semibold mb-4">{dict.video.youMayLike}</h2>
         <div className="space-y-4">
-          {otherVideosWithoutThis.slice(0, 3).map((video) => (
+          {otherVideosWithoutThis?.slice(0, 3).map((video) => (
             <Link
               href={`/${lang}/videos/${video.videoId}`}
               key={video.videoId}

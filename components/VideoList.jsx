@@ -1,9 +1,10 @@
 import { getDictionary } from "@/app/[lang]/dictionaries/dictionaries";
+import getVideos from "@/utils/getVideos";
 import Link from "next/link";
 import VideoCard from "./VideoCard";
 
 const VideoList = async ({ lang }) => {
-  const videosData = await import("@/data/videos.json");
+  const videosData = await getVideos();
   const dict = await getDictionary(lang);
 
   return (
@@ -20,7 +21,7 @@ const VideoList = async ({ lang }) => {
 
       {/* Grid style video cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {videosData.default.map((video) => (
+        {videosData?.map((video) => (
           <Link href={`/${lang}/videos/${video.videoId}`} key={video.videoId}>
             <VideoCard video={video} />
           </Link>
