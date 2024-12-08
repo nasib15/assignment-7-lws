@@ -8,11 +8,15 @@ export default function Modal({ children }) {
   const router = useRouter();
 
   const onDismiss = useCallback(() => {
-    router.back();
+    if (router && router.back) {
+      router.back();
+    }
   }, [router]);
 
   const onClick = useCallback(
     (e) => {
+      if (!overlay.current || !wrapper.current) return;
+
       if (e.target === overlay.current || e.target === wrapper.current) {
         if (onDismiss) onDismiss();
       }
@@ -22,14 +26,18 @@ export default function Modal({ children }) {
 
   const onKeyDown = useCallback(
     (e) => {
-      if (e.key === "Escape") onDismiss();
+      if (e.key === "Escape" && onDismiss) {
+        onDismiss();
+      }
     },
     [onDismiss]
   );
 
   useEffect(() => {
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+    if (typeof window !== "undefined") {
+      document.addEventListener("keydown", onKeyDown);
+      return () => document.removeEventListener("keydown", onKeyDown);
+    }
   }, [onKeyDown]);
 
   return (
