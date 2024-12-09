@@ -1,17 +1,22 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
 
 export default function Modal({ children }) {
   const overlay = useRef(null);
   const wrapper = useRef(null);
   const router = useRouter();
+  const pathname = usePathname();
 
   const onDismiss = useCallback(() => {
-    if (router && router.back) {
-      router.back();
-    }
-  }, [router]);
+    // Get the current language and base path
+    const pathParts = pathname.split("/");
+    const lang = pathParts[1];
+    const basePath = `/${lang}`;
+
+    // Navigate to the base path directly
+    router.push(basePath);
+  }, [router, pathname]);
 
   const onClick = useCallback(
     (e) => {
@@ -34,11 +39,8 @@ export default function Modal({ children }) {
   );
 
   useEffect(() => {
-    // Disable scrolling on body when modal is open
     document.body.style.overflow = "hidden";
-
     return () => {
-      // Re-enable scrolling when modal is closed
       document.body.style.overflow = "unset";
     };
   }, []);
@@ -49,6 +51,14 @@ export default function Modal({ children }) {
       return () => document.removeEventListener("keydown", onKeyDown);
     }
   }, [onKeyDown]);
+
+  // Check if pathname matches /[lang]/videos/[id] pattern
+  const isVideoPath = /^\/[a-z]{2}\/videos\/[a-zA-Z0-9_-]+$/.test(pathname);
+
+  // Return null if not a video path
+  if (!isVideoPath) {
+    return null;
+  }
 
   return (
     <div
