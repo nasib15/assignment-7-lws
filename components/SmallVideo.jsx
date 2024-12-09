@@ -2,15 +2,12 @@
 
 import { getRelativeTime } from "@/utils/getRelativeTime";
 import Image from "next/image";
+import Link from "next/link";
 
 const SmallVideo = ({ video, lang }) => {
-  const handleClick = () => {
-    window.location.href = `/${lang}/videos/${video.videoId}`;
-  };
-
   return (
-    <div
-      onClick={handleClick}
+    <Link
+      href={`/${lang}/videos/${video.videoId}`}
       key={video.videoId}
       className="flex items-start space-x-4 cursor-pointer"
     >
@@ -28,7 +25,7 @@ const SmallVideo = ({ video, lang }) => {
           {getRelativeTime(new Date(video.publishTime))}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
