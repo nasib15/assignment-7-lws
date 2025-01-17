@@ -29,8 +29,8 @@
 1. **Clone the repository:**
 
    ```
-   git clone https://github.com/Learn-with-Sumit/batch-2-assignment-7-lws-xstream-nasib15
-   cd batch-2-assignment-7-lws-xstream-nasib15
+   git clone https://github.com/nasib15/assignment-7-lws.git
+   cd assignment-7-lws
    ```
 
 2. **Install the dependencies:**
